@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="1000dp"
+        android:background="@drawable/gradient_bg">
+
+        <TextView
+            android:id="@+id/tvLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="Login"
+            android:textColor="@color/white_alpha"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:padding="20dp"
+            app:layout_constraintEnd_toStartOf="@id/tvRegistro"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvRegistro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="Register"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:padding="20dp"
+            android:background="@drawable/oval_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvLogin"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginHorizontal="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvLogin"
+            app:layout_constraintVertical_bias="0.3"
+            android:background="@drawable/scrollview_bg"
+            android:paddingVertical="35dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Username"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/gray"
+                    android:drawablePadding="10dp"
+                    android:drawableStart="@drawable/ic_user"
+                    android:drawableTint="@color/secondary_color"/>
+
+                <EditText
+                    android:id="@+id/etUsername"
+                    android:inputType="text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/gray"
+                    android:paddingStart="20dp"
+                    android:text="Luaish"
+                    android:layout_marginBottom="15dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Password"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/gray"
+                    android:drawablePadding="10dp"
+                    android:drawableStart="@drawable/ic_lock"
+                    android:drawableTint="@color/secondary_color"/>
+
+                <EditText
+                    android:id="@+id/etPassword"
+                    android:inputType="textPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/gray"
+                    android:paddingStart="20dp"
+                    android:layout_marginBottom="15dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Género"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/gray"
+                    android:drawablePadding="10dp"
+                    android:layout_marginBottom="15dp"
+                    android:drawableStart="@drawable/ic_male"
+                    android:drawableTint="@color/secondary_color"/>
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:weightSum="2">
+
+                    <RadioButton
+                        android:id="@+id/rbMasculino"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Masculino"
+                        android:checked="true"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/primary_color_light"/>
+
+                    <RadioButton
+                        android:id="@+id/rbFemenino"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Femenino"
+                        android:layout_weight="1"
+                        android:checked="false"
+                        android:buttonTint="@color/primary_color_light"/>
+
+                </RadioGroup>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Intereses"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/gray"
+                    android:drawablePadding="10dp"
+                    android:layout_marginBottom="15dp"
+                    android:drawableStart="@drawable/ic_interests"
+                    android:drawableTint="@color/secondary_color"/>
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/cgIntereses"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.chip.Chip
+                        style="@style/chEntry"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:chipStartPadding="10dp"
+                        android:text="Deportes"
+                        android:checked="true"/>
+
+                    <com.google.android.material.chip.Chip
+                        style="@style/chEntry"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Programación"/>
+
+                    <com.google.android.material.chip.Chip
+                        style="@style/chEntry"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Matemáticas" />
+
+                    <com.google.android.material.chip.Chip
+                        style="@style/chEntry"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Videojuegos"
+                        android:checked="true"/>
+
+                </com.google.android.material.chip.ChipGroup>
+
+                <ImageButton
+                    android:id="@+id/ibAddChip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:background="@drawable/addchip_bg"
+                    android:paddingVertical="7dp"
+                    app:srcCompat="@drawable/ic_add"
+                    android:layout_marginBottom="20dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Notificaciones"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/gray"
+                    android:drawablePadding="10dp"
+                    android:layout_marginBottom="15dp"
+                    android:drawableStart="@drawable/ic_notifications"
+                    android:drawableTint="@color/secondary_color"/>
+
+                <ToggleButton
+                    android:id="@+id/tbNotifications"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:checked="true"
+                    android:backgroundTint="@color/primary_color_light"
+                    android:textColor="@color/white"
+                    android:layout_marginBottom="15dp"/>
+
+                <LinearLayout
+                    android:id="@+id/lyNotifications"
+                    android:visibility="gone"
+                    tools:visibility="visible"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <Switch
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Anuncios y Novedades"
+                        android:checked="true"
+                        android:layout_marginBottom="10dp"/>
+
+                    <Switch
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Mensajes"
+                        android:layout_marginBottom="10dp"/>
+
+                    <Switch
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Promociones"/>
+
+                </LinearLayout>
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Acepto los términos y condiciones"
+                    android:buttonTint="@color/secondary_color"
+                    android:checked="true"/>
+
+            </LinearLayout>
+
+            <Button
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="Sign Up"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:backgroundTint="@color/secondary_color"
+                android:onClick="signUp"/>
+
+
+        </LinearLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
