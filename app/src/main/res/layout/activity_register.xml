@@ -44,6 +44,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
+            android:translationZ="0dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
@@ -208,15 +209,64 @@
 
                 </com.google.android.material.chip.ChipGroup>
 
-                <ImageButton
-                    android:id="@+id/ibAddChip"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:background="@drawable/addchip_bg"
-                    android:paddingVertical="7dp"
-                    app:srcCompat="@drawable/ic_add"
-                    android:layout_marginBottom="20dp"/>
+                    android:layout_marginBottom="15dp">
+
+                    <ImageButton
+                        android:id="@+id/ibAddChip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:background="@drawable/addchip_bg"
+                        android:paddingVertical="7dp"
+                        app:srcCompat="@drawable/ic_add"
+                        android:layout_marginBottom="20dp"/>
+
+                    <LinearLayout
+                        android:visibility="gone"
+                        android:id="@+id/lyAddChip"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/ly_add_chip_bg"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="30dp"
+                        android:translationZ="1dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Indica el nombre del chip"
+                            android:textColor="@color/white_alpha"
+                            android:textSize="16sp"
+                            android:textAlignment="center"
+                            android:layout_marginBottom="15dp"/>
+
+                        <EditText
+                            android:id="@+id/etAddChip"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/white"
+                            android:hint="Ej. Fortnite"
+                            tools:text="Hola"
+                            android:textAlignment="center"
+                            android:textColorHint="@color/white_alpha"
+                            android:textColor="@color/white"
+                            />
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Agregar"
+                            android:layout_gravity="center"
+                            android:onClick="addChip"/>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
 
                 <TextView
                     android:layout_width="wrap_content"

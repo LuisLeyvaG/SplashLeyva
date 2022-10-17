@@ -1,15 +1,21 @@
 package com.example.splashleyva
 
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.Toast
 import com.example.mysplash.json.MyInfo
 import com.example.splashleyva.databinding.ActivityRegisterBinding
 import com.example.splashleyva.json.Metodos
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.*
@@ -50,6 +56,14 @@ class RegisterActivity : AppCompatActivity() {
             toggleSwitches(isChecked)
         }
 
+        initChipListeners()
+
+        val ibAddChip: ImageButton = binding.ibAddChip
+
+        ibAddChip.setOnClickListener {
+            binding.lyAddChip.visibility = LinearLayout.VISIBLE
+            ibAddChip.visibility = ImageButton.GONE
+        }
 
     }
 
@@ -113,6 +127,47 @@ class RegisterActivity : AppCompatActivity() {
         } else {
             binding.lyNotifications.visibility = LinearLayout.GONE
         }
+    }
+
+    private fun initChipListeners() {
+        val chipGroup: ChipGroup = binding.cgIntereses
+        var chip: Chip
+
+        for (i in 0 until chipGroup.childCount) {
+            chip = chipGroup.getChildAt(i) as Chip
+            chip.setOnCloseIconClickListener {
+                val chipito = it as Chip
+                Toast.makeText(this, chipito.text.toString() + " se ha borrado de la lista", Toast.LENGTH_SHORT).show()
+                chipGroup.removeView(it)
+            }
+            chip.setOnClickListener {
+                val chipito = it as Chip
+                if (chipito.isChecked) {
+                    Toast.makeText(this, chipito.text.toString() + " seleccionado", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, chipito.text.toString() + " desseleccionado", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    fun addChip(v: View) {
+        val etAddChip: EditText = binding.etAddChip
+        val nombreChip = etAddChip.text.toString()
+
+        val chipNew = Chip(this)
+        chipNew.text = nombreChip
+        chipNew.isCloseIconVisible = true
+        chipNew.isCheckable = true
+        chipNew.setTextColor(Color.WHITE)
+
+        binding.cgIntereses.addView(chipNew as View)
+
+        initChipListeners()
+
+        binding.lyAddChip.visibility = LinearLayout.GONE
+        binding.ibAddChip.visibility = ImageButton.VISIBLE
+
     }
 
     private fun listToJson(info: MyInfo?, list: MutableList<MyInfo?>) {
