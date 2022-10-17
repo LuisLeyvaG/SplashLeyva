@@ -69,6 +69,7 @@
                 android:drawableTint="@color/secondary_color"/>
 
             <EditText
+                android:id="@+id/etUsername"
                 android:inputType="text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,6 +88,7 @@
                 android:drawableTint="@color/secondary_color"/>
 
             <EditText
+                android:id="@+id/etPassword"
                 android:inputType="textPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -94,6 +96,7 @@
                 android:layout_marginBottom="15dp"/>
 
             <TextView
+                android:id="@+id/tvForgotPswd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Forgot password?"

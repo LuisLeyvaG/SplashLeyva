@@ -2,8 +2,5 @@ package com.example.mysplash.json
 
 import java.io.Serializable
 
-class MyInfo : Serializable {
-    var user: String? = null
-    var password: String? = null
-    var email: String? = null
+class MyInfo(public var usuario: String, public var password: String,  public var email: String?) : Serializable {
 }
