@@ -1,14 +1,13 @@
 package com.example.splashleyva
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.mysplash.json.MyInfo
 import com.example.splashleyva.databinding.ActivityLoginBinding
-import com.example.splashleyva.databinding.ActivityMainBinding
 import com.example.splashleyva.json.Metodos
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -77,9 +76,17 @@ class LoginActivity : AppCompatActivity() {
         } else {
             for (myInfo in list) {
                 if (myInfo.usuario == usr && myInfo.password == pswd) {
+
                     val intent = Intent(this@LoginActivity, Menu::class.java)
+
+                    intent.putExtra(
+                        "usuario",
+                        "Bienvenid@ $usuario"
+                    )
+
                     startActivity(intent)
                     i = 1
+
                 }
             }
             if (i == 0) {
