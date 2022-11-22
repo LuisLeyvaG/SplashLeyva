@@ -27,8 +27,12 @@ class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
 
+    companion object {
+        val archivo = "archivo.json"
+    }
+
     private val TAG: String = "RegisterActivity"
-    val archivo = "archivo.json"
+
     var list: List<MyInfo> = java.util.ArrayList()
     lateinit var json: String
 
@@ -204,7 +208,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun getFile(): File? {
-        return File(dataDir, this.archivo)
+        return File(dataDir, archivo)
     }
 
     private fun usuarios(list: List<MyInfo>, usr: String): Boolean {

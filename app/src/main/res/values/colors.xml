@@ -21,4 +21,7 @@
     <color name="primary_color_light">#475B77</color>
     <color name="secondary_color">#70BF96</color>
 
+    <color name="DarkBlue">#1c313a</color>
+    <color name="LightGrey">#eeeeee</color>
+
 </resources>

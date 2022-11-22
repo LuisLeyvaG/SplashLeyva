@@ -20,7 +20,10 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
 
-    private lateinit var list: List<MyInfo>
+    companion object {
+        lateinit var list: List<MyInfo>
+    }
+
     var TAG = "LoginActivity"
     private lateinit var json: String
     private lateinit var usuario: String
@@ -79,12 +82,10 @@ class LoginActivity : AppCompatActivity() {
 
                     val intent = Intent(this@LoginActivity, Menu::class.java)
 
-                    intent.putExtra(
-                        "usuario",
-                        "Bienvenid@ $usuario"
-                    )
+                    intent.putExtra("Objeto", myInfo)
 
                     startActivity(intent)
+
                     i = 1
 
                 }
