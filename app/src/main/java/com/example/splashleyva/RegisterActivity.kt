@@ -1,7 +1,6 @@
 package com.example.splashleyva
 
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,7 +12,8 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import com.example.mysplash.json.MyInfo
 import com.example.splashleyva.databinding.ActivityRegisterBinding
-import com.example.splashleyva.json.Metodos
+import com.example.splashleyva.des.MyDesUtil
+import com.example.splashleyva.json.MyData
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.gson.Gson
@@ -28,7 +28,9 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
 
     companion object {
-        val archivo = "archivo.json"
+        val archivo = "File.json"
+        val KEY = "+4xij6jQRSBdCymMxweza/uMYo+o0EUg"
+        var myDesUtil = MyDesUtil().addStringKeyBase64(KEY)
     }
 
     private val TAG: String = "RegisterActivity"
@@ -41,12 +43,16 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var password: String
     private lateinit var email: String
 
+    lateinit var lista: List<MyData>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityRegisterBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
+
+        lista = ArrayList<MyData>()
 
         if (ReadFile()) {
             jsonToList(json)
@@ -82,8 +88,8 @@ class RegisterActivity : AppCompatActivity() {
             if (!list.isEmpty() && usuarios(list, usuario)) {
                 Toast.makeText(this, "El nombre de usuario está en uso", Toast.LENGTH_LONG).show()
             } else {
-                password = Metodos.bytesToHex(Metodos.createSha1(password))
-                user = MyInfo(usuario, password, email)
+                //password = Metodos.bytesToHex(Metodos.createSha1(password))
+                user = MyInfo(usuario, password, email, lista)
                 listToJson(user, list as MutableList<MyInfo?>)
                 Log.d( TAG,"Se ha registrado el usuario");
                 Log.d(TAG, user.usuario + "\n" + user.password + "\n" + user.email)
@@ -181,12 +187,14 @@ class RegisterActivity : AppCompatActivity() {
         list.add(info)
         json = gson.toJson(list, ArrayList::class.java)
         if (json == null) {
-            Log.d(this.TAG, "Error json")
+            Log.d(TAG, "Error json")
         } else {
-            Log.d(this.TAG, json)
-            writeFile(json)
+            Log.d(TAG, json)
+            json = myDesUtil.cifrar(json)
+            Log.d("jeisonsito", myDesUtil.desCifrar(json))
+            writeFile(json!!)
         }
-        Toast.makeText(applicationContext, "Se ha registrado correctamente", Toast.LENGTH_LONG).show()
+        Toast.makeText(applicationContext, "Ok", Toast.LENGTH_LONG).show()
     }
 
     private fun writeFile(text: String): Boolean {
@@ -247,7 +255,7 @@ class RegisterActivity : AppCompatActivity() {
         return file.isFile && file.exists()
     }
 
-    private fun jsonToList(json: String?) {
+    fun jsonToList(json: String) {
         var gson: Gson? = null
         val mensaje: String? = null
         if (json == null || json.length == 0) {
@@ -255,9 +263,10 @@ class RegisterActivity : AppCompatActivity() {
             return
         }
         gson = Gson()
-        val listType = object : TypeToken<java.util.ArrayList<MyInfo?>?>() {}.type
-        this.list = gson.fromJson<List<MyInfo>>(json, listType)
-        if (this.list == null || this.list.size == 0) {
+        val listType = object : TypeToken<List<MyInfo>>() {}.type
+        list = gson.fromJson(myDesUtil.desCifrar(json), listType)
+        Log.d(TAG, "HOLA BRO")
+        if (list == null || list.isEmpty()) {
             Toast.makeText(applicationContext, "Error list is null or empty", Toast.LENGTH_LONG)
                 .show()
             return

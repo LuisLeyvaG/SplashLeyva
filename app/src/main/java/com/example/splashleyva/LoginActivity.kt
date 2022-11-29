@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mysplash.json.MyInfo
 import com.example.splashleyva.databinding.ActivityLoginBinding
-import com.example.splashleyva.json.Metodos
+import com.example.splashleyva.des.MyDesUtil
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.File
@@ -20,6 +20,12 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
 
+    //DES
+    val KEY = "+4xij6jQRSBdCymMxweza/uMYo+o0EUg"
+    private val testClaro = "Hola mundo"
+    lateinit var testDesCifrado: String
+    var myDesUtil = MyDesUtil().addStringKeyBase64(KEY)
+
     companion object {
         lateinit var list: List<MyInfo>
     }
@@ -28,7 +34,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var json: String
     private lateinit var usuario: String
     private lateinit var password: String
-    val archivo = "archivo.json"
+    val archivo = "File.json"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
     fun signIn(v: View) {
         usuario = binding.etUsername.text.toString()
         password = binding.etPassword.text.toString()
-        password = Metodos.bytesToHex(Metodos.createSha1(password))
+        //password = Metodos.bytesToHex(Metodos.createSha1(password))
         verificar(usuario, password)
 
     }
@@ -112,6 +118,8 @@ class LoginActivity : AppCompatActivity() {
             fileInputStream = FileInputStream(file)
             fileInputStream.read(bytes)
             json = String(bytes)
+            Log.d("jeisonCifradino", json)
+            //json = myDesUtil.desCifrar(json)
             Log.d(TAG, json)
         } catch (e: FileNotFoundException) {
             e.printStackTrace()
@@ -139,7 +147,25 @@ class LoginActivity : AppCompatActivity() {
         }
         gson = Gson()
         val listType = object : TypeToken<List<MyInfo>>() {}.type
-        list = gson.fromJson(json, listType)
+
+        /*var bundle = intent.extras
+        var jsonsito = bundle?.getBoolean("isJsonCif")
+
+        if (bundle != null && jsonsito != null && jsonsito == true) {
+
+            list = gson.fromJson(myDesUtil.desCifrar(json), listType)
+
+        } else {
+            list = gson.fromJson(json, listType)
+        }*/
+
+        /*if (intent.extras?.getBoolean("isJsonCif") != null) {
+            list = gson.fromJson(json, listType)
+            return
+        }*/
+
+        list = gson.fromJson(myDesUtil.desCifrar(json), listType)
+
         Log.d(TAG, "HOLA BRO")
         if (list == null || list.isEmpty()) {
             Toast.makeText(applicationContext, "Error list is null or empty", Toast.LENGTH_LONG)
